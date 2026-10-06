@@ -1,0 +1,8 @@
+.hud { position: absolute; z-index: 25; left: clamp(12px, 3%, 28px); right: clamp(12px, 3%, 28px); bottom: clamp(12px, 3%, 28px); display: flex; gap: 16px; align-items: end; justify-content: space-between; padding: 12px 16px; background: rgba(19, 3, 3, .82); border-left: 3px solid var(--color-orange); backdrop-filter: blur(8px); box-shadow: 5px 5px 0 rgba(0, 0, 0, .5); }
+.hud-thumbnail { display: none; }
+.hud-copy { min-width: 0; }
+.hud-label, .hud-description, .hud-meta p { margin: 0; }
+.hud-label { color: #fff0df; font: 500 clamp(1.2rem, 2vw, 1.7rem)/1 Oswald, Impact, sans-serif; text-transform: uppercase; letter-spacing: .04em; }
+.hud-description { color: #d9ad9e; font-size: clamp(10px, 1vw, 12px); line-height: 1.4; margin-top: 5px; }
+.hud-meta { flex: none; color: var(--color-orange); font-size: 10px; text-align: right; text-transform: uppercase; letter-spacing: .08em; line-height: 1.5; }
+@media (max-width: 580px) { .hud { padding: 10px 12px; } .hud-meta { display: none; } }

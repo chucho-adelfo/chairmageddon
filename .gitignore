@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.DS_Store
+
+# Raw source videos are much larger than the web versions in public/assets/animations/.
+/animations/*.mp4
+/animations/*.mov
+
+# Recreated from drawings/ by the predev and prebuild scripts.
+/public/assets/drawings/

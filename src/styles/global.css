@@ -1,0 +1,185 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Oswald:wght@400;500;600;700&display=swap");
+
+:root {
+  --color-bg: #080101;
+  --color-panel: #180303;
+  --color-red: #e52b16;
+  --color-orange: #ff741c;
+  --color-text: #f7dfc9;
+  --color-muted: #bf8272;
+  --color-line: rgba(255, 90, 43, 0.42);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-family: "DM Mono", monospace;
+  font-synthesis: none;
+}
+
+body {
+  background:
+    linear-gradient(rgba(6, 0, 0, .88), rgba(6, 0, 0, .88)),
+    url("/assets/backgrounds/infernal-room-v2.png") center / cover fixed,
+    var(--color-bg);
+}
+
+body:has(.archive-page) { background: var(--color-bg); }
+
+.site-shell { min-height: 100vh; }
+
+.room-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 12px;
+  gap: 0;
+}
+
+.room-page__scene {
+  width: min(100%, calc((100dvh - 96px) * 4 / 3), 1440px);
+  min-width: 0;
+}
+
+.game-frame {
+  width: 100%;
+  padding: 4px;
+  background: #090101;
+  border: 1px solid #8f1a10;
+  box-shadow: 0 0 0 4px #030000, 0 0 50px rgba(218, 22, 0, .3);
+}
+
+.game-screen {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  background: #120101;
+}
+
+.room-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: min(100%, calc((100dvh - 96px) * 4 / 3), 1440px);
+  min-height: 68px;
+  margin-top: 8px;
+  padding: 12px 18px;
+  background: rgba(9, 1, 1, .94);
+  border-top: 2px solid var(--color-red);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .55);
+}
+
+.room-nav__intro, .room-nav__status, .room-nav__number {
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  font-size: 10px;
+  white-space: nowrap;
+}
+.room-nav__intro span { color: var(--color-orange); }
+.room-nav__status { text-align: right; }
+.room-nav ol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(9px, 1.8vw, 28px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.room-nav a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  color: var(--color-text);
+  font: 500 clamp(16px, 1.7vw, 24px)/1 Oswald, Impact, sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color .15s ease, text-shadow .15s ease;
+}
+.room-nav a:hover, .room-nav a:focus-visible {
+  color: #fff2b8;
+  text-shadow: 0 0 12px var(--color-orange);
+  outline: 1px solid var(--color-orange);
+  outline-offset: 6px;
+}
+.room-nav__number { color: var(--color-orange); font-size: 9px; }
+
+.page-layout {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: clamp(16px, 4vw, 50px);
+}
+.page-layout .game-frame { max-width: 1100px; }
+.page-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 5vw, 70px);
+  background:
+    linear-gradient(115deg, rgba(8, 1, 1, .91), rgba(25, 2, 1, .7)),
+    url("/assets/backgrounds/infernal-room-v2.png") center / cover;
+}
+.page-overlay__inner {
+  width: min(720px, 100%);
+  padding: clamp(22px, 4vw, 52px);
+  background: rgba(12, 1, 1, .89);
+  border: 1px solid var(--color-line);
+  border-top: 4px solid var(--color-red);
+  box-shadow: 12px 12px 0 #070101, 0 0 45px rgba(255, 44, 0, .15);
+}
+.page-overlay__kicker {
+  margin: 0 0 12px;
+  color: var(--color-orange);
+  font-size: 11px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+.page-overlay h1 {
+  margin: 0 0 28px;
+  color: var(--color-text);
+  font: 600 clamp(3.5rem, 8vw, 7rem)/.95 Oswald, Impact, sans-serif;
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+  text-shadow: 4px 4px 0 #680b04;
+}
+.page-overlay__content {
+  color: #e7c0af;
+  font-size: clamp(.9rem, 1.5vw, 1.1rem);
+  line-height: 1.7;
+}
+.page-overlay__content p { margin: 0; }
+.back-link {
+  display: inline-block;
+  margin-top: 32px;
+  padding: 12px 18px;
+  color: var(--color-text);
+  border: 1px solid var(--color-orange);
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.back-link:hover, .back-link:focus-visible {
+  background: var(--color-red);
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .room-page { justify-content: flex-start; padding: 0; }
+  .room-page__scene, .room-nav { width: 100%; }
+  .game-frame { padding: 0; border: 0; box-shadow: none; }
+  .room-nav { margin-top: 0; padding: 14px; flex-direction: column; gap: 14px; }
+  .room-nav ol { width: 100%; }
+  .room-nav__status { display: none; }
+}
+@media (max-width: 480px) {
+  .room-nav ol { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px 8px; text-align: center; }
+  .room-nav a { justify-content: center; font-size: 17px; }
+  .room-nav__number { display: none; }
+  .page-layout .game-screen { min-height: 560px; aspect-ratio: auto !important; }
+}

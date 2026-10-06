@@ -1,0 +1,189 @@
+.interactive-scene {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  background: #030000;
+  touch-action: none;
+  user-select: none;
+}
+
+.interactive-scene__image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-width: none;
+  pointer-events: none;
+}
+
+.interactive-scene--phoenix {
+  background: #111342;
+}
+.interactive-scene--phoenix .interactive-scene__image {
+  object-fit: contain;
+}
+
+.interactive-scene--drawing-room {
+  background: #061029;
+}
+.interactive-scene--drawing-room .interactive-scene__image {
+  object-fit: contain;
+}
+
+.interactive-scene__canvas {
+  position: absolute;
+  max-width: none;
+}
+
+.interactive-scene__hotspot {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  color: #fff0dc;
+  border: 1px solid transparent;
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+  outline: 0;
+  transition: border-color .16s ease, box-shadow .16s ease, background-color .16s ease;
+}
+
+.interactive-scene__hotspot--ellipse { border-radius: 50%; }
+
+.interactive-scene__hotspot:hover,
+.interactive-scene__hotspot:focus-visible {
+  border-color: rgba(255, 111, 38, .45);
+  background: rgba(255, 62, 15, .055);
+}
+.interactive-scene__hotspot--glow:hover,
+.interactive-scene__hotspot--glow:focus-visible {
+  box-shadow: 0 0 8px rgba(255, 70, 20, .5), 0 0 20px rgba(255, 30, 0, .2);
+}
+.interactive-scene__hotspot--pulse:hover,
+.interactive-scene__hotspot--pulse:focus-visible {
+  animation: scene-hotspot-pulse 1.2s ease-in-out infinite alternate;
+}
+.interactive-scene__hotspot--none:hover {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+.interactive-scene__hotspot:focus-visible {
+  border-color: #ffe4aa;
+  box-shadow: inset 0 0 0 1px #fff0d0, 0 0 18px rgba(255, 95, 20, .65);
+}
+.interactive-scene--drawing-room .interactive-scene__hotspot:hover,
+.interactive-scene--drawing-room .interactive-scene__hotspot:focus-visible {
+  border-color: rgba(226, 220, 162, .5);
+  background: rgba(220, 216, 160, .04);
+  box-shadow: 0 0 10px rgba(244, 229, 160, .38), 0 0 24px rgba(118, 154, 223, .2);
+}
+.interactive-scene--drawing-room .interactive-scene__label {
+  color: #f8edc3;
+  background: rgba(5, 13, 35, .88);
+  border-color: rgba(226, 220, 162, .45);
+}
+.interactive-scene__label {
+  max-width: 90%;
+  padding: 5px 8px;
+  color: #ffead1;
+  background: rgba(13, 1, 1, .86);
+  border: 1px solid rgba(255, 100, 44, .55);
+  font: 500 clamp(10px, 1vw, 13px)/1.2 "DM Mono", monospace;
+  letter-spacing: .09em;
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .14s ease;
+}
+.interactive-scene__hotspot:hover .interactive-scene__label,
+.interactive-scene__hotspot:focus-visible .interactive-scene__label {
+  opacity: 1;
+}
+
+.interactive-scene__fire {
+  position: absolute;
+  aspect-ratio: 543 / 724;
+  background: url("/assets/objects/fire-frames.png") 0 0 / 400% 100% no-repeat;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 14px rgba(255, 75, 0, .8));
+  pointer-events: none;
+  animation: interactive-fire .64s steps(4, end) infinite;
+}
+
+.interactive-scene__canvas--debug {
+  outline: 2px dashed rgba(255, 236, 104, .95);
+  outline-offset: -2px;
+}
+.interactive-scene__canvas--debug .interactive-scene__hotspot {
+  border: 2px dashed #a7ff92;
+  background: rgba(0, 75, 20, .2);
+  box-shadow: none;
+}
+.interactive-scene__canvas--debug .interactive-scene__label { display: none; }
+.interactive-scene__coordinates {
+  padding: 4px 6px;
+  color: #eaffdf;
+  background: rgba(0, 24, 5, .88);
+  font: 500 clamp(9px, .75vw, 12px)/1.3 "DM Mono", monospace;
+  text-align: left;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.interactive-scene__debug {
+  position: fixed;
+  z-index: 40;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  gap: 3px;
+  padding: 9px 11px;
+  color: #eaffdf;
+  background: rgba(0, 18, 4, .9);
+  border: 1px solid #a7ff92;
+  font: 11px/1.3 "DM Mono", monospace;
+  pointer-events: none;
+}
+.interactive-scene__debug strong { text-transform: uppercase; }
+
+.interactive-scene__fade {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  background: #020000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .21s ease;
+}
+.interactive-scene__fade--active { opacity: 1; }
+
+@keyframes interactive-fire {
+  to { background-position: 133.333% 0; }
+}
+@keyframes scene-hotspot-pulse {
+  to { box-shadow: 0 0 16px rgba(255, 74, 17, .6); }
+}
+
+@media (hover: none) {
+  .interactive-scene__hotspot::before {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 231, 182, .45);
+    box-shadow: 0 0 7px rgba(255, 102, 38, .5);
+    pointer-events: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .interactive-scene__fire,
+  .interactive-scene__hotspot--pulse { animation: none; }
+  .interactive-scene__fade,
+  .interactive-scene__hotspot,
+  .interactive-scene__label { transition: none; }
+}

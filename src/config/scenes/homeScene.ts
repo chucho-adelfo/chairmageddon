@@ -1,0 +1,53 @@
+import type { InteractiveSceneConfig } from "../../types/scene";
+
+export const homeScene: InteractiveSceneConfig = {
+  id: "phoenix",
+  background: "/assets/scenes/phoenix/phoenix-background.png",
+  fit: "contain",
+  imageWidth: 1448,
+  imageHeight: 1086,
+  imageAlt: "A bright orange pixel phoenix stands against a violet sky and fiery desert.",
+  hotspots: [
+    {
+      id: "art",
+      label: "Art",
+      route: "/art",
+      x: 48,
+      y: 25,
+      width: 17,
+      height: 23,
+      shape: "ellipse",
+      hoverEffect: "glow",
+    },
+    {
+      id: "research",
+      label: "Research / Science",
+      route: "/research",
+      x: 36,
+      y: 38,
+      width: 14,
+      height: 24,
+      hoverEffect: "outline",
+    },
+    {
+      id: "about",
+      label: "About",
+      route: "/about",
+      x: 49,
+      y: 51,
+      width: 15,
+      height: 30,
+      hoverEffect: "glow",
+    },
+    {
+      id: "writing",
+      label: "Writing / Misc",
+      route: "/writing",
+      x: 37,
+      y: 64,
+      width: 12,
+      height: 22,
+      hoverEffect: "outline",
+    },
+  ],
+};

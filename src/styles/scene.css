@@ -1,0 +1,48 @@
+.scene { position: absolute; inset: 0; overflow: hidden; background-color: #220201; background-position: center; background-repeat: no-repeat; background-size: cover; }
+.scene::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to bottom, rgba(0, 0, 0, .42), transparent 24%, transparent 65%, rgba(0, 0, 0, .47)); }
+.scene-object-layer, .scene-fire-layer, .scene-hotspot-layer, .debug-overlay, .screen-effects { position: absolute; inset: 0; }
+.scene-object { position: absolute; object-fit: contain; pointer-events: none; }
+.scene-fire-layer { z-index: 3; pointer-events: none; }
+.scene-fire {
+  position: absolute;
+  display: block;
+  aspect-ratio: 543 / 724;
+  background-image: url("/assets/objects/fire-frames.png");
+  background-repeat: no-repeat;
+  background-size: 400% 100%;
+  background-position: 0 0;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 14px rgba(255, 75, 0, .8));
+  animation: fire-frames .64s steps(4, end) infinite;
+}
+.scene-fire--left { left: 1%; top: 49%; width: 17%; }
+.scene-fire--upper { left: 15%; top: 11%; width: 8%; animation-delay: -.19s; }
+.scene-fire--table { left: 43%; top: 51%; width: 14%; animation-delay: -.32s; }
+.scene-fire--right { right: 1%; top: 37%; width: 15%; animation-delay: -.48s; }
+@keyframes fire-frames { to { background-position: 133.333% 0; } }
+.scene-hotspot-layer { z-index: 15; }
+.navigation-hotspot { position: absolute; display: block; min-width: 44px; min-height: 44px; cursor: pointer; outline: 0; text-decoration: none; }
+.navigation-hotspot::before { content: ""; position: absolute; left: 50%; top: 50%; width: clamp(22px, 3vw, 34px); height: clamp(22px, 3vw, 34px); transform: translate(-50%, -50%); border: 1px solid #ffe6ba; border-radius: 50%; background: rgba(95, 8, 3, .36); box-shadow: 0 0 0 5px rgba(0, 0, 0, .35), 0 0 18px #ff4514; transition: transform .2s ease, background .2s ease; }
+.navigation-hotspot::after { content: "+"; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -54%); color: #fff5dc; font: 18px/1 "DM Mono", monospace; }
+.navigation-hotspot:hover::before, .navigation-hotspot:focus-visible::before, .navigation-hotspot--selected::before { background: rgba(255, 91, 31, .75); transform: translate(-50%, -50%) scale(1.22); }
+.navigation-hotspot:focus-visible::before { outline: 2px solid white; outline-offset: 6px; }
+.hotspot-label { position: absolute; z-index: 2; opacity: 0; width: max-content; max-width: 150px; padding: 8px 10px; color: #fff1dc; background: #170505; border: 1px solid var(--color-orange); font: 500 12px/1.2 "DM Mono", monospace; text-transform: uppercase; letter-spacing: .1em; box-shadow: 4px 4px 0 #090202; pointer-events: none; transition: opacity .15s ease; }
+.navigation-hotspot:hover .hotspot-label, .navigation-hotspot:focus-visible .hotspot-label, .navigation-hotspot--selected .hotspot-label { opacity: 1; }
+.hotspot-label--top { left: 50%; bottom: calc(100% + 5px); transform: translateX(-50%); }
+.hotspot-label--bottom { left: 50%; top: calc(100% + 5px); transform: translateX(-50%); }
+.hotspot-label--left { right: calc(100% + 5px); top: 50%; transform: translateY(-50%); }
+.hotspot-label--right { left: calc(100% + 5px); top: 50%; transform: translateY(-50%); }
+.hotspot-label--center { left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.top-prompt { position: absolute; z-index: 20; top: 3%; left: 3%; margin: 0; color: #fff0de; font: 700 clamp(2rem, 5vw, 5rem)/1 Oswald, Impact, sans-serif; text-transform: uppercase; letter-spacing: -.025em; text-shadow: 4px 5px 0 #310602, 0 0 20px #b31908; }
+.screen-effects { z-index: 50; pointer-events: none; background: repeating-linear-gradient(to bottom, transparent 0, transparent 3px, rgba(0, 0, 0, .09) 4px), radial-gradient(circle at center, transparent 56%, rgba(0, 0, 0, .3)); opacity: .7; }
+.debug-overlay { z-index: 40; pointer-events: none; }
+.debug-box { position: absolute; border: 2px dashed #aaff8f; color: white; background: rgba(0, 40, 12, .25); font-size: 11px; padding: 3px; }
+.debug-readout { position: absolute; right: 10px; top: 10px; padding: 6px 8px; color: #e6ffd9; background: rgba(0, 0, 0, .8); border: 1px solid #aaff8f; font-size: 12px; }
+@media (max-width: 480px) {
+  .top-prompt { font-size: clamp(1.5rem, 6vw, 2rem); }
+  .hotspot-label { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; }
+  .scene-fire { animation: none; background-position: 0 0; }
+}

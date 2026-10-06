@@ -1,0 +1,65 @@
+.drawing-archive .archive-header h1 {
+  min-width: 0;
+  font-size: clamp(2.7rem, 7vw, 7rem);
+  overflow-wrap: anywhere;
+}
+
+.drawing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(22px, 3vw, 42px) clamp(14px, 2vw, 28px);
+}
+
+.drawing-card {
+  min-width: 0;
+  margin: 0;
+  background: #120303;
+  border: 1px solid var(--color-line);
+  box-shadow: 7px 7px 0 #050101;
+}
+
+.drawing-card a {
+  display: block;
+  aspect-ratio: 1;
+  background: #080202;
+  overflow: hidden;
+}
+
+.drawing-card a:focus-visible {
+  outline: 2px solid var(--color-orange);
+  outline-offset: 3px;
+}
+
+.drawing-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.drawing-card figcaption {
+  display: flex;
+  gap: 12px;
+  padding: 13px 16px 15px;
+  border-top: 1px solid var(--color-line);
+  color: var(--color-text);
+  font: 500 clamp(13px, 1.4vw, 17px)/1.25 Oswald, Impact, sans-serif;
+  overflow-wrap: anywhere;
+}
+
+.drawing-card figcaption span:first-child {
+  flex: none;
+  color: var(--color-orange);
+  font: 10px/1.7 "DM Mono", monospace;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 960px) {
+  .drawing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .drawing-grid { grid-template-columns: 1fr; }
+}
