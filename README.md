@@ -47,6 +47,8 @@ To add an animation, copy an MP4 and a same-basename JPG poster into `public/ass
 
 ## GitHub Pages
 
-The `.github/workflows/deploy.yml` workflow builds and publishes `dist/` on pushes to `main`. In the GitHub repository's **Settings → Pages**, select **GitHub Actions** as the source. Vite picks the repository path from `GITHUB_REPOSITORY`; `SITE_BASE_PATH` can override it for a custom domain. The build also writes `dist/404.html` so direct archive links can load on Pages.
+The `.github/workflows/deploy.yml` workflow builds and publishes `dist/` on pushes to `main`. In the GitHub repository's **Settings → Pages**, select **GitHub Actions** as the source. Serving `main` from `/ (root)` does not work: the source `index.html` references TypeScript/React files that GitHub Pages cannot build. The workflow sets `SITE_BASE_PATH=/chairmageddon/` so Vite writes the correct asset and router URLs. The build also writes `dist/404.html` so direct archive links can load on Pages.
+
+To check the production build locally at the Pages subpath, run `SITE_BASE_PATH=/chairmageddon/ npm run build` followed by `SITE_BASE_PATH=/chairmageddon/ npm run preview`, then open the printed local URL.
 
 The `.gitignore` excludes `node_modules/`, `dist/`, the generated drawing copies, and raw MP4/MOV files in `animations/`. Commit the original `drawings/` folder and the smaller web videos in `public/assets/animations/`; the build regenerates the drawing copies from the originals.
